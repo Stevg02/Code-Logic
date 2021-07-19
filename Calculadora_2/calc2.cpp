@@ -33,7 +33,8 @@ int main(){
 
 void func_calc(Stack<double> & numbers, Stack<std::string> & symbols)
 {
-    std::string answer, phrase;
+    std::string phrase;
+    double answer;
     bool flag = false;
 
     while (flag == false){
@@ -64,9 +65,6 @@ double calculator(Stack<double> & numbers, Stack<std::string> & symbols, std::st
         if (token == "("){
             parenthesis.push(token);
         }
-        else if (token == "+" || token == "-" || token == "*" || token == "/" || token == "~"){
-            symbols.push(token);
-        }
         else if (token == ")"){
             a = numbers.top();
             numbers.pop();
@@ -75,11 +73,21 @@ double calculator(Stack<double> & numbers, Stack<std::string> & symbols, std::st
             s = symbols.top();
             symbols.pop();
             ans = operation(b,a,s);
+            numbers.push(ans);
             parenthesis.pop();
+        }
+        else if (token == "+" || token == "-" || token == "*" || token == "/"){
+            symbols.push(token);
+        }
+        else if ( token == "~"){
+            a = numbers.top();
+            numbers.pop();
+            numbers.push(a*(-1));
         }
         else{
             numbers.push(stod(token));
         }
+        
     }
     return numbers.top();
 }

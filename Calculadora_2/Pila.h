@@ -80,7 +80,6 @@ void Stack<Type>::pop()
     }
     else{
         std::cout << "Empty Stack" << std::endl;
-        exit(EXIT_FAILURE);
     }
 }
 
