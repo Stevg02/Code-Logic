@@ -13,7 +13,7 @@ class Stack{
         void pop();
     private:
         Type * arrayType;
-        int def_size = 10;
+        int def_size;
         int indexTop;                                           // Indicador de la posicion del último elementop ingresado
 };
 
@@ -24,7 +24,7 @@ Stack<Type>::Stack(int max)
 {
     indexTop = -1;
     def_size = max;
-    arrayType = new Type[size];    
+    arrayType = new Type[def_size];    
 }
 
 /*------------------------ Método Destructor -------------------------*/
@@ -64,7 +64,7 @@ Type Stack<Type>::top() const
 template <class Type>
 void Stack<Type>::push(Type data)
 {
-    if (indexTop + 1 < size)
+    if (indexTop + 1 < def_size)
     {
         arrayType[++indexTop] = data;
     }
