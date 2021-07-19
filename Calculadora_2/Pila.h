@@ -4,15 +4,16 @@
 template <class Type>
 class Stack{
     public:
-        Stack(static const int def_size = 10);                  // Constructor
+        Stack(int def_size = 10);                  // Constructor
         ~Stack();                                               // Destructor
         Type top() const;                                       // Devuelve el primer último elemento ingresado en la pila
         bool empty() const;                                     // verifica si la pila está vacía o no
         int size() const;                                       // Devuelve la capacidad de la pila
-        Type push(Type);                                        // Ingresa un elemento en la pila
+        void push(Type);                                        // Ingresa un elemento en la pila
+        void pop();
     private:
         Type * arrayType;
-        int size = 10;
+        int def_size = 10;
         int indexTop;                                           // Indicador de la posicion del último elementop ingresado
 };
 
@@ -22,8 +23,8 @@ template <class Type>
 Stack<Type>::Stack(int max)
 {
     indexTop = -1;
-    size = max;
-    arrType = new Type[size];    
+    def_size = max;
+    arrayType = new Type[size];    
 }
 
 /*------------------------ Método Destructor -------------------------*/
@@ -37,7 +38,7 @@ Stack<Type>::~Stack()
 /*------------------------ Método Size -------------------------*/
 
 template <class Type>
-Type Stack::size() const
+int Stack<Type>::size() const
 {
     return indexTop + 1;    
 }
@@ -55,7 +56,7 @@ bool Stack<Type>::empty() const
 template <class Type>
 Type Stack<Type>::top() const
 {
-    return arrType[indexTop];
+    return arrayType[indexTop];
 }
 
 /*------------------------ Método Push -------------------------*/
@@ -65,7 +66,7 @@ void Stack<Type>::push(Type data)
 {
     if (indexTop + 1 < size)
     {
-        arrType[++indexTop] = data;
+        arrayType[++indexTop] = data;
     }
 }
 
