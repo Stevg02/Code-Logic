@@ -1,9 +1,10 @@
 # include <iostream>
 # include <string>
+# include <sstream>
 # include "Pila.h"
 
 void func_calc(Stack<double> &, Stack<std::string> &);
-double calculator(Stack<double> & Stack<std::string> &, std::string &);
+double calculator(Stack<double> &, Stack<std::string> &, std::string &);
 double operation(double &, double &, std::string &);
 
 int main(){
@@ -80,6 +81,7 @@ double calculator(Stack<double> & numbers, Stack<std::string> & symbols, std::st
             numbers.push(stod(token));
         }
     }
+    return numbers.top();
 }
 
 
@@ -97,7 +99,7 @@ double operation(double & a, double & b, std::string & op){
     }
     else if(op == "/"){
         if(b == 0){
-            cout << "ERROR: Division por cero" <<endl;
+            std::cout << "ERROR: Division por cero" <<std::endl;
             exit(EXIT_FAILURE);
         }
         else{
