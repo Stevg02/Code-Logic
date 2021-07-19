@@ -16,6 +16,8 @@ class Stack{
         int indexTop;                                           // Indicador de la posicion del último elementop ingresado
 };
 
+/*------------------------ Método Constructor -------------------------*/
+
 template <class Type>
 Stack<Type>::Stack(int max)
 {
@@ -24,16 +26,61 @@ Stack<Type>::Stack(int max)
     arrType = new Type[size];    
 }
 
+/*------------------------ Método Destructor -------------------------*/
+
 template <class Type>
 Stack<Type>::~Stack()
 {
     delete [] arrayType;
 }
 
+/*------------------------ Método Size -------------------------*/
+
 template <class Type>
 Type Stack::size() const
 {
-    
+    return indexTop + 1;    
+}
+
+/*------------------------ Método empty -------------------------*/
+
+template <class Type>
+bool Stack<Type>::empty() const
+{
+    return (indexTop == -1);
+}
+
+/*------------------------ Método Top -------------------------*/
+
+template <class Type>
+Type Stack<Type>::top() const
+{
+    return arrType[indexTop];
+}
+
+/*------------------------ Método Push -------------------------*/
+
+template <class Type>
+void Stack<Type>::push(Type data)
+{
+    if (indexTop + 1 < size)
+    {
+        arrType[++indexTop] = data;
+    }
+}
+
+/*------------------------ Método Pop -------------------------*/
+
+template <class Type>
+void Stack<Type>::pop()
+{
+    if(!empty()){
+        indexTop--;
+    }
+    else{
+        std::cout << "Empty Stack" << std::endl;
+        exit(EXIT_FAILURE);
+    }
 }
 
 
