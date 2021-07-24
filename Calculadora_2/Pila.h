@@ -11,6 +11,7 @@ class Stack{
         int size() const;                                       // Devuelve la capacidad de la pila
         void push(Type);                                        // Ingresa un elemento en la pila
         void pop();
+        void reset();                                           // Limpiamos completamente la pila
     private:
         Type * arrayType;
         int def_size;
@@ -84,4 +85,10 @@ void Stack<Type>::pop()
 }
 
 
+/*------------------------ Método Reset -------------------------*/
 
+template <class Type>
+void Stack<Type>::reset()
+{
+    indexTop = -1;
+}

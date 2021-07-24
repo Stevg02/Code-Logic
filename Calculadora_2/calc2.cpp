@@ -1,5 +1,4 @@
 # include <iostream>
-
 # include <string>
 # include <sstream>
 # include "Pila.h"
@@ -41,15 +40,19 @@ void func_calc(Stack<double> & numbers, Stack<std::string> & symbols)
     while (flag == false){
         
         // std::cout << "\033[2J\033[1;1H" << std::endl;
-        std::cout << "Ingrese 'q' para salir, o ingrese una expresión entre paréntesis separando numero y operacion mediante un espacio en blanco: "<< std::endl;
+        std::cout << "Expresión: ";
 
         getline(std::cin, phrase);
         if (phrase == "q"){
             flag = true;
+            std::cout << "\033[2J\033[1;1H" << std::endl;
+            std::cout << "Gracias." << std::endl;
         }
         else{
             answer = calculator(numbers, symbols, phrase);
             std::cout << answer << std::endl;
+            numbers.reset();
+            symbols.reset();
         }
     }
 }
@@ -67,28 +70,32 @@ double calculator(Stack<double> & numbers, Stack<std::string> & symbols, std::st
             parenthesis.push(token);
         }
         else if (token == ")"){
-            a = numbers.top();
-            numbers.pop();
-            b = numbers.top();
-            numbers.pop();
-            s = symbols.top();
-            symbols.pop();
-            ans = operation(b,a,s);
-            numbers.push(ans);
-            parenthesis.pop();
+            
+            if (symbols.top() == "~"){
+                a = numbers.top();
+                numbers.pop();
+                symbols.pop();
+                parenthesis.pop();
+                numbers.push(-a);
+            }
+            else{
+                a = numbers.top();
+                numbers.pop();
+                b = numbers.top();
+                numbers.pop();
+                s = symbols.top();
+                symbols.pop();
+                ans = operation(b,a,s);
+                numbers.push(ans);
+                parenthesis.pop();
+            }            
         }
-        else if (token == "+" || token == "-" || token == "*" || token == "/"){
+        else if (token == "+" || token == "-" || token == "*" || token == "/" || token == "~"){
             symbols.push(token);
-        }
-        else if ( token == "~"){
-            a = numbers.top();
-            numbers.pop();
-            numbers.push(a*(-1));
         }
         else{
             numbers.push(stod(token));
-        }
-        
+        }  
     }
     return numbers.top();
 }
