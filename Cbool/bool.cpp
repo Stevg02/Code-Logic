@@ -39,7 +39,6 @@ bool calculator(std::string & phrase){
     Stack<bool> prop;
     Stack<char> symbols;
     Stack<char> parenthesis;
-    bool ans;
     
     for (int i=0; i< phrase.length(); i++){
         if (phrase[i] == '('){
